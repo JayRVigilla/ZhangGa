@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
  *      - Used in PostList component
  */
 
-function PostCard({ id, title, description }) {
+function PostCard({ postId, title, description }) {
 
   return (
-    <div className="PostCard" id={id}>
-      <h5><Link to={`/${id}`}>{title}</Link></h5>
+    <div className="PostCard" id={postId}>
+      <h5><Link to={`/${postId}`}>{title}</Link></h5>
       <p><i>{description}</i></p>
     </div>
   );

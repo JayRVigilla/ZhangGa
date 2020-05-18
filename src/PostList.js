@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './PostList.css';
 import PostCard from './PostCard';
-import { useDispatch, useSelector, shallowEqual} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchTitlesFromAPI } from './actionCreators';
 
 
@@ -12,43 +12,45 @@ import { fetchTitlesFromAPI } from './actionCreators';
  */
 
 function PostList() {
-  const titleList = useSelector(st => st.titles, shallowEqual)
-  const [isLoading, setIsLoading] = useState(true);
+  // const titleList = useSelector(st => st.titles, shallowEqual);
+  // const [isLoading, setIsLoading] = useState(true);
+  const [idToPost, setIdToPost] = useState("Loading");
   const dispatch = useDispatch();
 
 
   // Work in Progress...
 
-/**function TitleList() {
-  const titles = useSelector(st => st.titles);
-  const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(function() {
-    async function fetchTitle() {
-      await dispatch(fetchTitlesFromAPI());
-      setIsLoading(false);
-    }
-    if (isLoading) {
-      fetchTitle();
-    }
-  }, [dispatch, isLoading]); */
+  /**function TitleList() {
+    const titles = useSelector(st => st.titles);
+    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(function() {
+      async function fetchTitle() {
+        await dispatch(fetchTitlesFromAPI());
+        setIsLoading(false);
+      }
+      if (isLoading) {
+        fetchTitle();
+      }
+    }, [dispatch, isLoading]); */
 
   useEffect(function () {
-    async function getTitles() { 
+    async function getTitles() {
       dispatch(fetchTitlesFromAPI());
     }
-    
-  })
+    setIdToPost(getTitles());
+  }, [dispatch])
 
   //useSelector for idToPost
   let postsList = Object.keys(idToPost).map(id => idToPost[id]);
 
   const postCards = postsList.map(({ title, description, postId }) => (
-    <PostCard
-      key={postId}
-      postId={postId}
-      title={title}
-      description={description}></PostCard>
+      <PostCard
+        key={postId}
+        postId={postId}
+        title={title}
+        description={description}></PostCard>
+
   ))
 
 
@@ -57,7 +59,7 @@ function PostList() {
       <h3>＿φ(°-°=)</h3>
       <p>Welcome to Microblog!</p>
       <div>
-        {postCards}
+          {postCards}
       </div>
     </div>
   );

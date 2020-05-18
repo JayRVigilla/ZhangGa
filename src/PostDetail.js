@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './PostDetail.css';
-import { useParams, Redirect } from 'react-router-dom';
-import PostForm from './PostForm';
+// import { useParams, Redirect } from 'react-router-dom';
+// import PostForm from './PostForm';
 // import CommentsList from './CommentsList';
 // import CommentForm from './CommentForm';
 

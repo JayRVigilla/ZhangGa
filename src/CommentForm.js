@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './CommentForm.css';
-// import { v4 as uuid } from "uuid";
 
 /** CommentForm: Component that renders the form to add a comment to a post
  *    - Holds state of formdata

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './PostForm.css';
-// import { v4 as uuid } from "uuid";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createPostToAPI, updatePostToAPI } from './actionCreators';
 
 
 /** PostForm: Component that renders a form to add or update a post 
@@ -11,21 +12,20 @@ import { useParams, Link } from 'react-router-dom';
  *    - Used in PostDetail and Routes components
  */
 
-function PostForm({ addPost, post, updatePost }) {
-
+function PostForm({post}) {
+  const dispatch = useDispatch();
+  const history = useHistory();
   let INITIAL_STATE = { title: "", description: "", body: "" };
 
   const { id } = useParams();
 
-  // if post already exists, grab values from the post to populate the form
+  // if post already exists, grab existing values from the post to pre-populate the form
   if (id) {
     const { title, description, body } = post;
     INITIAL_STATE = { title, description, body };
   }
 
   const [formData, setFormData] = useState({...INITIAL_STATE });  
-  // QUESTION: heard spreading this OBJ is a good idea, what are the pros? 
-  // If that component gets unmounted and mounted again, we wouldn't get the same reference..
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -40,18 +40,18 @@ function PostForm({ addPost, post, updatePost }) {
     evt.preventDefault();
     const newFormData = {
       ...formData,
-
-      // postId: id ? id : uuid(),
       idToComment: id ? {...post.idToComment} : {}
     }
 
     if (id) {
-      updatePost(newFormData, id);
+      dispatch(updatePostToAPI(newFormData))  /**updatePost(newFormData, id) */;
     } else {
-      addPost(/** newFormData.postId,*/ newFormData); // kept in case new post fails...
+      dispatch(createPostToAPI(newFormData));
+      //addPost(/** newFormData.postId,*/ newFormData); // kept in case new post fails...
     }
 
     setFormData({ ...INITIAL_STATE });
+    history.push('/');
   }
 
 

@@ -3,7 +3,7 @@ import PostDetail from "./PostDetail";
 import CommentsList from './CommentsList';
 import CommentForm from './CommentForm';
 import PostForm from './PostForm';
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import {
   fetchPostFromAPI,
   deletePostFromAPI,
