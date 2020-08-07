@@ -6,9 +6,9 @@ import { useHistory } from 'react-router-dom';
 
 
 /** App: Component that renders Nav and Routes
- *    - Holds state of idToPost, an object of post objects, 
+ *    - Holds state of idToPost, an object of post objects,
  *      each of which have a key of comments, an object of comment objects
- *    - Used in Index compontent
+ *    - Used in Index component
  */
 
 function App() {
