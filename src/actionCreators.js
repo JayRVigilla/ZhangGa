@@ -122,16 +122,12 @@ export function fetchTitlesFromAPI() {
 export function fetchPostFromAPI(postId) {
   return async function (dispatch) {
     try {
-      console.log('*****\n\n Running try from fetchPostFromAPI \n\n *****')
       let resp = await axios.get(`${API_BASE_URL}/${postId}`);
       let post = resp.data;
-      console.log('*****\n\n Value of post in fetchPostFromAPI', post, '\n\n *****')
 
       let idToComment = arrayToObject(post.comments)
-      console.log('*****\n\n Value of idToComment in fetchPostFromAPI', idToComment, '\n\n *****')
       post.idToComment = idToComment;
       // delete post.comments;
-      console.log('*****\n\n Final value of post in fetchPostFromAPI', post, '\n\n *****')
       dispatch(fetchPost(post));
 
     } catch (error) {
@@ -177,6 +173,7 @@ export function createCommentToAPI(commentData, postId) {
   return async function (dispatch) {
     try {
       let newComment = await axios.post(`${API_BASE_URL}/${postId}/comments`, commentData);
+      console.log('*****\n\n Running createCommentTo API from actionCreators \n\n *****') 
       dispatch(addComment(newComment.data));
     } catch (error) {
       dispatch(handleError(error.response.data));

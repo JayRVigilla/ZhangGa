@@ -31,7 +31,7 @@ function PostList(/**{idToPost}**/) {
       key={id}
       id={id}
       title={title}
-      description={description}></PostCard>
+      description={description} />
   ))
 
 

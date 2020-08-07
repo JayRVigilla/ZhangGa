@@ -13,11 +13,9 @@ import CommentForm from './CommentForm';
  *    - Uses PostForm, CommentsList, and CommentForm components
  */
 
-function PostDetail({ /**idToPost,**/ post, updatePost, addComment, deleteComment, deletePost, isEditing, setIsEditing }) {
+function PostDetail({post, updatePost, addComment, deleteComment, deletePost, isEditing, setIsEditing }) {
 
   const { id } = useParams();
-  // const [isEditing, setIsEditing] = useState(false);
-  // const post = idToPost[id];
 
   if (!post) {
     return <Redirect to="/" />
@@ -37,9 +35,7 @@ function PostDetail({ /**idToPost,**/ post, updatePost, addComment, deleteCommen
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p className="PostDetail-body border-bottom">{body}</p>
-      {/* <CommentsList idToPost={idToPost} postId={id} deleteComment={deleteComment}/>
-      <CommentForm postId={id} addComment={addComment}/> */}
-      <CommentsList comments={post.comments} postId={id} deleteComment={deleteComment}/>
+      <CommentsList comments={post.comments} deleteComment={deleteComment}/>
       <CommentForm postId={id} addComment={addComment}/>
     </div>
   );

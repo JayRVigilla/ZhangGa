@@ -26,20 +26,9 @@ function rootReducer(state = DEFAULT_STATE, action) {
     case FETCH_TITLES:
       return { ...state, titles: action.titles }
 
-    // case FETCH_COMMENTS:
-    //   return { ...state, idToComment: action.idToComment }
-
     case FETCH_POST:
       return {
         ...state,
-        // idToPost: {
-        //   ...state.idToPost,
-        //   [action.post.id]: action.post
-        // }
-        // post: {
-        //   ...state.post,
-        //   [action.post.id]: action.post
-        // }
         post: action.post,
       }
 
@@ -95,16 +84,22 @@ function rootReducer(state = DEFAULT_STATE, action) {
     case ADD_COMMENT:
 
       return {
-        ...state, idToPost:
+        ...state,
+        // idToPost:
+        // {
+        //   ...state.idToPost, [action.postId]:
+        //   {
+        //     ...state.idToPost[action.postId],
+        //     idToComment: {
+        //       ...state.idToPost[action.postId].idToComment,
+        //       [action.newComment.id]: action.newComment.text
+        //     }
+        //   }
+        // }
+        post:
         {
-          ...state.idToPost, [action.postId]:
-          {
-            ...state.idToPost[action.postId],
-            idToComment: {
-              ...state.idToPost[action.postId].idToComment,
-              [action.newComment.id]: action.newComment.text
-            }
-          }
+          ...state.post,
+          comments: action.newComment,
         }
       };
 
