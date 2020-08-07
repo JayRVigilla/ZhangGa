@@ -38,6 +38,7 @@ function fetchTitles(titles) {
 // }
 
 function fetchPost(post) {
+// function fetchPost(postId){
   return {
     type: FETCH_POST,
     post
@@ -121,13 +122,16 @@ export function fetchTitlesFromAPI() {
 export function fetchPostFromAPI(postId) {
   return async function (dispatch) {
     try {
+      console.log('*****\n\n Running try from fetchPostFromAPI \n\n *****')
       let resp = await axios.get(`${API_BASE_URL}/${postId}`);
       let post = resp.data;
       console.log('*****\n\n Value of post in fetchPostFromAPI', post, '\n\n *****')
 
-      let idToComment = arrayToObject(post.data.comments)
+      let idToComment = arrayToObject(post.comments)
+      console.log('*****\n\n Value of idToComment in fetchPostFromAPI', idToComment, '\n\n *****')
       post.idToComment = idToComment;
-      delete post.comments;
+      // delete post.comments;
+      console.log('*****\n\n Final value of post in fetchPostFromAPI', post, '\n\n *****')
       dispatch(fetchPost(post));
 
     } catch (error) {

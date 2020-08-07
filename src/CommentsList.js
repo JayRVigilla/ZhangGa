@@ -6,25 +6,12 @@ import React from "react";
  *    - Uses Comment component
  */
 
-function CommentsList({ idToComment, postId, handleRemove }) {
-
-  // const idToComment = idToPost[postId].comments; 
-  const commentIds = Object.keys(idToComment[postId]);
-
-  const commentComponents = commentIds.map(id => (
-    <div className="Comment" key={id}>
+function CommentsList({comments, handleRemove }) {
+  const commentComponents = comments.map(c => (
+    <div className="Comment" key={c.id}>
     <button className="Comment-button btn btn-danger py-0 px-2" onClick={handleRemove}><b>x</b></button>
-    <li className="Comment-list-item">{idToComment[id]}</li>
+    <li className="Comment-list-item">{c.text}</li>
   </div>
-    
-    
-    // <Comment
-    //   postId={postId}
-    //   key={id}
-    //   commentId={id}
-    //   comment={idToComment[id]}
-    //   deleteComment={deleteComment}
-    // />
   ));
 
   return (

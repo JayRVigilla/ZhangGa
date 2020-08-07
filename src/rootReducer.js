@@ -12,7 +12,8 @@ import {
 } from './actionTypes';
 
 const DEFAULT_STATE = {
-  idToPost: {},
+  // idToPost: {},
+  post: {},
   // idToComment: {},
   titles: []
 }
@@ -30,11 +31,16 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     case FETCH_POST:
       return {
-        ...state, idToPost:
-        {
-          ...state.idToPost,
-          [action.post.id]: action.post
-        }
+        ...state,
+        // idToPost: {
+        //   ...state.idToPost,
+        //   [action.post.id]: action.post
+        // }
+        // post: {
+        //   ...state.post,
+        //   [action.post.id]: action.post
+        // }
+        post: action.post,
       }
 
     case ERROR:
@@ -103,10 +109,10 @@ function rootReducer(state = DEFAULT_STATE, action) {
       };
 
     case DELETE_COMMENT:
-      let postCommentsCopy = {...state.idToPost[action.postId].idToComment};
+      let postCommentsCopy = { ...state.idToPost[action.postId].idToComment };
       delete postCommentsCopy[action.commentId];
       // to return to see if we need to spread out everything or just directly change this one thing
-      return {...state, [state.idToPost[action.postId].idToComment]: postCommentsCopy };
+      return { ...state, [state.idToPost[action.postId].idToComment]: postCommentsCopy };
 
     default:
       return state

@@ -6,7 +6,7 @@ import PostForm from './PostForm';
 import { /**Redirect,**/ useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchPostFromAPI } from "./actionCreators";
-import { /**useSelector,**/ useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 /** */
 
@@ -21,40 +21,43 @@ function Post({ idToPost, updatePost, deletePost, deleteComment, addComment }) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
-  // const post = idToPost[id];
-  // const [post, setPost] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
+  const post = useSelector(store => store.post)
 
-  useEffect(function() {
+  useEffect(function () {
     async function getPostData() {
       await dispatch(fetchPostFromAPI(id));
       setIsLoading(false);
     }
-    if(isLoading) getPostData();
+    if (isLoading) getPostData();
   }, [isLoading, dispatch, id])
-  // if (!post) {
-  //   return <Redirect to="/" />
-  // }
+
+  const loading = () => {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    )
+  }
 
   if (isEditing) {
     return <PostForm idToPost={idToPost} updatePost={updatePost} />
   }
 
-  // const { title, description, body } = post;
-
   return (
     <div>
-      <PostDetail
-        idToPost={idToPost}
-        deletePost={deletePost}
-        updatePost={updatePost}
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-        deleteComment={deleteComment}
-        addComment={addComment}
-      />
-      {/* <CommentsList idToPost={idToPost} postId={id} handleRemove={deleteComment} />
-      <CommentForm postId={id} addComment={addComment} /> */}
+      {isLoading
+        ? loading()
+        : <PostDetail
+          post={post}
+          deletePost={deletePost}
+          updatePost={updatePost}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          deleteComment={deleteComment}
+          addComment={addComment}
+        />
+      }
     </div>
   )
 }
