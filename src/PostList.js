@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './PostList.css';
 import PostCard from './PostCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTitlesFromAPI } from './actionCreators';
 
 /** PostList: Component that renders a welcome message and a list of posts
  *    - Holds prop of idToPost
@@ -8,14 +10,27 @@ import PostCard from './PostCard';
  *    - Uses PostCard component
  */
 
-function PostList() {
-  //useSelector for idToPost
-  let postsList = Object.keys(idToPost).map(id => idToPost[id]);
+function PostList(/**{idToPost}**/) {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const postCards = postsList.map(({ title, description, postId }) => (
+  useEffect(function(){
+    async function fetchTitles() {
+      console.log('use effect in PostList is running');
+      await dispatch(fetchTitlesFromAPI());
+      setIsLoading(false);
+    }
+    if (isLoading) fetchTitles();
+
+  }, [dispatch, isLoading])
+
+  // let postsList = Object.keys(idToPost).map(id => idToPost[id]);
+  const postsList = useSelector(store => store.titles);
+
+  const postCards = postsList.map(({ title, description, id }) => (
     <PostCard
-      key={postId}
-      postId={postId}
+      key={id}
+      id={id}
       title={title}
       description={description}></PostCard>
   ))
@@ -24,7 +39,7 @@ function PostList() {
   return (
     <div className="PostList">
       <h3>＿φ(°-°=)</h3>
-      <p>Welcome to Microblog!</p>
+      <p>Welcome to ZhangGa!</p>
       <div>
         {postCards}
       </div>

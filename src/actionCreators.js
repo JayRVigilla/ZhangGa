@@ -10,6 +10,7 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT
 } from './actionTypes';
+// import { useHistory } from 'react-router-dom';
 
 const API_BASE_URL = 'http://localhost:5000/api/posts';
 
@@ -18,7 +19,7 @@ const API_BASE_URL = 'http://localhost:5000/api/posts';
 const arrayToObject = (array) =>
   array.reduce((obj, item) => {
     obj[item.id] = item;
-    delete obj[item.id].id; // deletes id key from api data to remove redundancies 
+    delete obj[item.id].id; // deletes id key from api data to remove redundancies
     return obj
   }, {})
 
@@ -93,9 +94,11 @@ function deleteComment(commentId, postId) {
 /** Retrieve & dispatch all posts titles data. */
 
 export function fetchTitlesFromAPI() {
-  return async function thunk(dispatch) {
+  return async function (dispatch) {
+    console.log('running fetchTitlesFromAPI from actionCreators in thunk try');
     try {
       let titles = await axios.get(`${API_BASE_URL}/`);
+      console.log('*****\n\n Value of titles in fetchTitlesFromAPI', titles, '\n\n *****')
       dispatch(fetchTitles(titles.data));
     } catch (error) {
       dispatch(handleError(error.response.data));
@@ -118,7 +121,7 @@ export function fetchTitlesFromAPI() {
 /** Retrieve & dispatch a single post's data. */
 
 export function fetchPostFromAPI(postId) {
-  return async function thunk(dispatch) {
+  return async function (dispatch) {
     try {
       let resp = await axios.get(`${API_BASE_URL}/${postId}`);
       let post = resp.data;
@@ -135,7 +138,7 @@ export function fetchPostFromAPI(postId) {
 }
 
 export function createPostToAPI(postData) {
-  return async function thunk(dispatch) {
+  return async function (dispatch) {
     try {
       let newPost = await axios.post(`${API_BASE_URL}`, postData);
       dispatch(addPost(newPost.data));
@@ -146,7 +149,7 @@ export function createPostToAPI(postData) {
 }
 
 export function updatePostToAPI(postData, postId) {
-  return async function thunk(dispatch) {
+  return async function (dispatch) {
     try {
       let updatedPost = await axios.put(`${API_BASE_URL}/${postId}`, postData);
       dispatch(updatePost(updatedPost.data));
@@ -157,7 +160,7 @@ export function updatePostToAPI(postData, postId) {
 }
 
 export function deletePostFromAPI(postId) {
-  return async function thunk(dispatch) {
+  return async function (dispatch) {
     try {
       await axios.delete(`${API_BASE_URL}/${postId}`);
       dispatch(deletePost(postId));
@@ -168,7 +171,7 @@ export function deletePostFromAPI(postId) {
 }
 
 export function createCommentToAPI(commentData, postId) {
-  return async function thunk(dispatch) {
+  return async function (dispatch) {
     try {
       let newComment = await axios.post(`${API_BASE_URL}/${postId}/comments`, commentData);
       dispatch(addComment(newComment.data));
@@ -179,7 +182,7 @@ export function createCommentToAPI(commentData, postId) {
 }
 
 export function deleteCommentFromAPI(commentId, postId) {
-  return async function thunk(dispatch) {
+  return async function (dispatch) {
     try {
       await axios.delete(`${API_BASE_URL}/${postId}/comments/${commentId}`);
       dispatch(deleteComment(commentId, postId));

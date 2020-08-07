@@ -8,13 +8,13 @@ import { Redirect, useParams } from "react-router-dom";
 /** */
 
 
-/**"dispatch to 
+/**"dispatch to
  * updatePost,
 deletePost,
 addComment,
 deleteComment (in handleRemove)**/
 
-function Post({ idToPost }) {
+function Post({ idToPost, updatePost, deletePost, deleteComment, addComment }) {
   const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const post = idToPost[id];
@@ -27,22 +27,27 @@ function Post({ idToPost }) {
     return <PostForm idToPost={idToPost} updatePost={updatePost} />
   }
 
-  const { title, description, body } = post;
+  // const { title, description, body } = post;
 
 
-  // TODO: we can make a function higher up that 
+  // TODO: we can make a function higher up that
   // uses the postId where we have access and then pass down
-  function handleRemove() {
-    deleteComment(postId, commentId);
-  }
+  // function handleRemove() {
+    // deleteComment(postId, commentId);
+  // }
 
   return (
     <div>
       <PostDetail
+        idToPost={idToPost}
         deletePost={deletePost}
         updatePost={updatePost}
-        setIsEditing={setIsEditing} />
-      <CommentsList idToPost={idToPost} postId={id} handleRemove={handleRemove} />
+        isEditing={isEditing}
+        setIsEditing={setIsEditing}
+        deleteComment={deleteComment}
+        addComment={addComment}
+      />
+      <CommentsList idToPost={idToPost} postId={id} handleRemove={deleteComment} />
       <CommentForm postId={id} addComment={addComment} />
     </div>
   )

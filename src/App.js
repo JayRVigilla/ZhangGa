@@ -1,85 +1,49 @@
-import React, { useState } from 'react';
+import React/** , { useState }*/ from 'react';
 import './App.css';
 import Routes from "./Routes";
 import Nav from './Nav';
 import { useHistory } from 'react-router-dom';
-
+import {
+  createPostToAPI,
+  updatePostToAPI,
+  deletePostFromAPI,
+  createCommentToAPI,
+  deleteCommentFromAPI
+} from './actionCreators'
+import { useSelector } from "react-redux";
 
 /** App: Component that renders Nav and Routes
- *    - Holds state of idToPost, an object of post objects, 
+ *    - Holds state of idToPost, an object of post objects,
  *      each of which have a key of comments, an object of comment objects
- *    - Used in Index compontent
+ *    - Used in Index component
  */
 
 function App() {
-  const [idToPost, setIdToPost] = useState({});
+  const idToPost = useSelector(store => store.idToPost);
   const history = useHistory();
 
-  const addPost = (id, post) => {
-    // TODO: spread and delete the id key from formdata
-    let idToPostCopy = { ...idToPost, [id]: post };
-    delete idToPostCopy[id].postId
-    setIdToPost(idToPostCopy);
+  const addPost = (postData) => {
+    createPostToAPI(postData);
     history.push('/');
   }
 
-  const updatePost = (id, updatedPost) => {
-    let idToPostCopy = { ...idToPost, [id]: updatedPost }
-    setIdToPost(idToPostCopy);
+  const updatePost = (updatedPost, id) => {
+    updatePostToAPI(updatedPost, id);
     history.push('/');
   }
 
   const deletePost = (id) => {
-    let idToPostCopy = { ...idToPost };
-    delete idToPostCopy[id];
-    setIdToPost(idToPostCopy);
+    deletePostFromAPI(id);
     history.push('/');
   }
 
-
-  const addComment = (postId, data) => {
-/**
- *  QUESTION: Would it be better to have a separate object 
- * that holds keys of postId and values of the comments object?
-    Also, would it be better practice to assume comments would be
-    smaller and more manageable, meaning we should use an array so 
-    we can ensure the order is maintained ? For that, it 
-    would need to be an array of objects so that we could find the 
-    specific comment by id
-    easier to update if we do separate these out
- */
-   
-
-    let idToPostCopy = {
-      ...idToPost, [postId]:
-      {
-        ...idToPost[postId],
-        comments: {
-          ...idToPost[postId].comments,
-          [data.commentId]: data.comment
-        }
-      }
-    };
-
-    setIdToPost(idToPostCopy);
+  const addComment = (commentData, postId) => {
+    createCommentToAPI(commentData, postId);
   }
 
-  const deleteComment = (postId, commentId) => {
-
-    let idToPostCopy = {
-      ...idToPost, [postId]:
-      {
-        ...idToPost[postId],
-        comments: {
-          ...idToPost[postId].comments
-        }
-      }
-    }
-
-    delete idToPostCopy[postId].comments[commentId];
-    setIdToPost(idToPostCopy);
+  const deleteComment = (commentId, postId) => {
+    deletePostFromAPI(commentId, postId);
   }
-
 
   return (
     <div className="App">

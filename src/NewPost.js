@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React/**, { useState }**/ from "react";
 import PostForm from './PostForm';
 
 
 
-function NewPost({ }) {
+function NewPost({ addPost, idToPost}) {
   // dispatch addPost
   //useSelect(store) to send idToPost down from here
   return (

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React/**, { useState } */ from 'react';
 import './PostDetail.css';
 import { useParams, Redirect } from 'react-router-dom';
 import PostForm from './PostForm';
-// import CommentsList from './CommentsList';
-// import CommentForm from './CommentForm';
+import CommentsList from './CommentsList';
+import CommentForm from './CommentForm';
 
 
 /** PostDetail: Component that renders the detailed page for each post, including the title, description, body
@@ -13,21 +13,21 @@ import PostForm from './PostForm';
  *    - Uses PostForm, CommentsList, and CommentForm components
  */
 
-function PostDetail({ /**idToPost,updatePost, addComment, deleteComment,**/ deletePost,  setIsEditing }) {
+function PostDetail({ idToPost,updatePost, addComment, deleteComment, deletePost,  isEditing, setIsEditing }) {
 
-  // const { id } = useParams();
+  const { id } = useParams();
   // const [isEditing, setIsEditing] = useState(false);
-  // const post = idToPost[id];
+  const post = idToPost[id];
 
-  // if (!post) {
-  //   return <Redirect to="/" />
-  // }
+  if (!post) {
+    return <Redirect to="/" />
+  }
 
-  // if (isEditing) {
-  //   return <PostForm idToPost={idToPost} updatePost={updatePost}/>
-  // }
+  if (isEditing) {
+    return <PostForm idToPost={idToPost} updatePost={updatePost}/>
+  }
 
-  // const {title, description, body} = post;
+  const {title, description, body} = post;
 
   return (
     <div className="PostDetail">
@@ -36,8 +36,8 @@ function PostDetail({ /**idToPost,updatePost, addComment, deleteComment,**/ dele
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p className="PostDetail-body border-bottom">{body}</p>
-      {/* <CommentsList idToPost={idToPost} postId={id} deleteComment={deleteComment}/>
-      <CommentForm postId={id} addComment={addComment}/> */}
+      <CommentsList idToPost={idToPost} postId={id} deleteComment={deleteComment}/>
+      <CommentForm postId={id} addComment={addComment}/>
     </div>
   );
 }
