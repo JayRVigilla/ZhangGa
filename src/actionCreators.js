@@ -95,10 +95,8 @@ function deleteComment(commentId, postId) {
 
 export function fetchTitlesFromAPI() {
   return async function (dispatch) {
-    console.log('running fetchTitlesFromAPI from actionCreators in thunk try');
     try {
       let titles = await axios.get(`${API_BASE_URL}/`);
-      console.log('*****\n\n Value of titles in fetchTitlesFromAPI', titles, '\n\n *****')
       dispatch(fetchTitles(titles.data));
     } catch (error) {
       dispatch(handleError(error.response.data));
@@ -125,6 +123,7 @@ export function fetchPostFromAPI(postId) {
     try {
       let resp = await axios.get(`${API_BASE_URL}/${postId}`);
       let post = resp.data;
+      console.log('*****\n\n Value of post in fetchPostFromAPI', post, '\n\n *****')
 
       let idToComment = arrayToObject(post.data.comments)
       post.idToComment = idToComment;

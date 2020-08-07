@@ -16,7 +16,6 @@ function PostList(/**{idToPost}**/) {
 
   useEffect(function(){
     async function fetchTitles() {
-      console.log('use effect in PostList is running');
       await dispatch(fetchTitlesFromAPI());
       setIsLoading(false);
     }

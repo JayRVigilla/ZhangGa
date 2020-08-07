@@ -42,7 +42,7 @@ function App() {
   }
 
   const deleteComment = (commentId, postId) => {
-    deletePostFromAPI(commentId, postId);
+    deleteCommentFromAPI(commentId, postId);
   }
 
   return (
