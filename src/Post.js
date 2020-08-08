@@ -30,7 +30,7 @@ function Post({ idToPost, updatePost, deletePost, deleteComment, addComment }) {
       setIsLoading(false);
     }
     if (isLoading) getPostData();
-  }, [isLoading, dispatch, id])
+  }, [isLoading, dispatch, id, post])
 
   const loading = () => {
     return (

@@ -30,9 +30,10 @@ router.get("/", async function (req, res, next) {
  */
 
 router.post("/", async function (req, res, next) {
+  console.log('*****\n\n Post to comments route from  \n\n *****')
   try {
     const result = await db.query(
-      `INSERT INTO comments (text, post_id) VALUES ($1, $2) 
+      `INSERT INTO comments (text, post_id) VALUES ($1, $2)
         RETURNING id, text`,
       [req.body.text, req.params.post_id]);
     return res.json(result.rows[0]);

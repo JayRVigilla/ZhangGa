@@ -96,10 +96,19 @@ function rootReducer(state = DEFAULT_STATE, action) {
         //     }
         //   }
         // }
-        post:
-        {
-          ...state.post,
-          comments: action.newComment,
+
+        // post:
+        // {
+        //   ...state.post,
+        //   comments: [...state.post.comments, action.newComment],
+        // }
+
+        post: {
+          ...state.post, [action.postId]:
+          {
+            ...state.post[action.postId],
+            comments: [...state.post.comments, action.newComment],
+          }
         }
       };
 

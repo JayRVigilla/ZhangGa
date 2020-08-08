@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './CommentForm.css';
+import { useDispatch } from 'react-redux';
+import { createCommentToAPI } from './actionCreators';
 // import { v4 as uuid } from "uuid";
 
 /** CommentForm: Component that renders the form to add a comment to a post
@@ -10,8 +12,8 @@ import './CommentForm.css';
 
 function CommentForm({ postId, addComment }) {
 
-  let INITIAL_STATE = ({ comment: "" });
-
+  const INITIAL_STATE = ({ text: "" });
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ ...INITIAL_STATE });
 
   const handleChange = evt => {
@@ -21,17 +23,19 @@ function CommentForm({ postId, addComment }) {
       [name]: value
     }));
   }
-  const handleSubmit = evt => {
+
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     const newFormData = {
       ...formData,
-
-      // TODO: reconsider name here as well
-      // commentId: uuid()
     }
-
-    addComment(newFormData, postId);
-
+    console.log('*****\n\n Value of newFormData in ', newFormData, '\n\n *****')
+    async function addCommentFromForm() {
+      // await dispatch(addComment(newFormData, postId));
+      await dispatch(createCommentToAPI(newFormData, postId));
+    }
+    addCommentFromForm();
+    console.log('*****\n\n Passed addCommentFromForm from CommentForm \n\n *****')
     setFormData({ ...INITIAL_STATE });
   }
 
@@ -40,9 +44,9 @@ function CommentForm({ postId, addComment }) {
     <div className="CommentForm">
       <form onSubmit={handleSubmit}>
 
-        <label className="CommentForm-label" htmlFor="comment">Comment</label>
-        <input name="comment"
-          value={formData.comment}
+        <label className="CommentForm-label" htmlFor="text">Comment</label>
+        <input name="text"
+          value={formData.text}
           onChange={handleChange}>
         </input>
 

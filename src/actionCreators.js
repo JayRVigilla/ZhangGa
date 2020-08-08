@@ -10,18 +10,17 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT
 } from './actionTypes';
-// import { useHistory } from 'react-router-dom';
 
 const API_BASE_URL = 'http://localhost:5000/api/posts';
 
-// helper function from Medium to convert Arrays of Objects into an Object
-// https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
-const arrayToObject = (array) =>
-  array.reduce((obj, item) => {
-    obj[item.id] = item;
-    delete obj[item.id].id; // deletes id key from api data to remove redundancies
-    return obj
-  }, {})
+// // helper function from Medium to convert Arrays of Objects into an Object
+// // https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
+// const arrayToObject = (array) =>
+//   array.reduce((obj, item) => {
+//     obj[item.id] = item;
+//     delete obj[item.id].id; // deletes id key from api data to remove redundancies
+//     return obj
+//   }, {})
 
 function fetchTitles(titles) {
   return {
@@ -38,7 +37,7 @@ function fetchTitles(titles) {
 // }
 
 function fetchPost(post) {
-// function fetchPost(postId){
+  // function fetchPost(postId){
   return {
     type: FETCH_POST,
     post
@@ -76,6 +75,7 @@ function deletePost(postId) {
 }
 
 function addComment(newComment, postId) {
+  console.log('addComment action called');
   return {
     type: ADD_COMMENT,
     newComment,
@@ -125,8 +125,8 @@ export function fetchPostFromAPI(postId) {
       let resp = await axios.get(`${API_BASE_URL}/${postId}`);
       let post = resp.data;
 
-      let idToComment = arrayToObject(post.comments)
-      post.idToComment = idToComment;
+      // let idToComment = arrayToObject(post.comments)
+      // post.idToComment = idToComment;
       // delete post.comments;
       dispatch(fetchPost(post));
 
@@ -173,7 +173,6 @@ export function createCommentToAPI(commentData, postId) {
   return async function (dispatch) {
     try {
       let newComment = await axios.post(`${API_BASE_URL}/${postId}/comments`, commentData);
-      console.log('*****\n\n Running createCommentTo API from actionCreators \n\n *****') 
       dispatch(addComment(newComment.data));
     } catch (error) {
       dispatch(handleError(error.response.data));
