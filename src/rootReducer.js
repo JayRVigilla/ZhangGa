@@ -82,33 +82,11 @@ function rootReducer(state = DEFAULT_STATE, action) {
       };
 
     case ADD_COMMENT:
-
       return {
         ...state,
-        // idToPost:
-        // {
-        //   ...state.idToPost, [action.postId]:
-        //   {
-        //     ...state.idToPost[action.postId],
-        //     idToComment: {
-        //       ...state.idToPost[action.postId].idToComment,
-        //       [action.newComment.id]: action.newComment.text
-        //     }
-        //   }
-        // }
-
-        // post:
-        // {
-        //   ...state.post,
-        //   comments: [...state.post.comments, action.newComment],
-        // }
-
         post: {
-          ...state.post, [action.postId]:
-          {
-            ...state.post[action.postId],
+          ...state.post,
             comments: [...state.post.comments, action.newComment],
-          }
         }
       };
 
