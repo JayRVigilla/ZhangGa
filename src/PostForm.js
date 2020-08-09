@@ -4,8 +4,8 @@ import { v4 as uuid } from "uuid";
 import { useParams, Link } from 'react-router-dom';
 
 
-/** PostForm: Component that renders a form to add or update a post 
- * (based on existance of a valid id from params)
+/** PostForm: Component that renders a form to add or update a post
+ * (based on existence of a valid id from params)
  *    - Holds state of formdata
  *    - Holds props of addPost, idToPost, and updatePost
  *    - Used in PostDetail and Routes components
@@ -23,8 +23,8 @@ function PostForm({ addPost, idToPost, updatePost }) {
     INITIAL_STATE = { title, description, body };
   }
 
-  const [formData, setFormData] = useState({...INITIAL_STATE });  
-  // QUESTION: heard spreading this OBJ is a good idea, what are the pros? 
+  const [formData, setFormData] = useState({...INITIAL_STATE });
+  // QUESTION: heard spreading this OBJ is a good idea, what are the pros?
   // If that component gets unmounted and mounted again, we wouldn't get the same reference..
 
   const handleChange = evt => {
@@ -49,7 +49,7 @@ function PostForm({ addPost, idToPost, updatePost }) {
     if (id) {
       updatePost(id, newFormData);
     } else {
-      addPost(newFormData.key, newFormData); 
+      addPost(newFormData.key, newFormData);
     }
 
     setFormData({ ...INITIAL_STATE });

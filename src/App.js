@@ -16,7 +16,6 @@ function App() {
   const history = useHistory();
 
   const addPost = (id, post) => {
-    // TODO: spread and delete the id key from formdata
     let idToPostCopy = { ...idToPost, [id]: post };
     setIdToPost(idToPostCopy);
     history.push('/');
@@ -37,12 +36,6 @@ function App() {
 
 
   const addComment = (postId, comment) => {
-
-    // QUESTION: Would it be better to have a separate object that holds keys of postId and values of the comments object?
-    // Also, would it be better practice to assume comments would be smaller and more manageable, meaning we should use an array so we can ensure the order is maintained? For that, it would need to be an array of objects so that we could find the specific comment by id
-
-    // easier to update if we do separate these out
-
     let idToPostCopy = {
       ...idToPost, [postId]:
       {

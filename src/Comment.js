@@ -7,7 +7,6 @@ import './Comment.css';
 
 function Comment({comment, deleteComment, postId, commentId}) {
 
-  // TODO: we can make a function higher up that uses the postId where we have access and then pass down
   function handleRemove(){
     deleteComment(postId, commentId);
   }

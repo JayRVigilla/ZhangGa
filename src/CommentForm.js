@@ -25,8 +25,6 @@ function CommentForm({ postId, addComment }) {
     evt.preventDefault();
     const newFormData = {
       ...formData,
-
-      // TODO: reconsider name here as well
       key: uuid()
     }
 
