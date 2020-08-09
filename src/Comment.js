@@ -1,21 +1,29 @@
 import React from "react";
-import './Comment.css';
+import { deleteCommentFromAPI } from "./actionCreators";
+import { useDispatch } from "react-redux";
 
-/** Comment: Component that renders each list item comment inside CommentsList component
- *    - Holds props of comment, deleteComment, postId, and commentId
+/** Comment: Component that renders each comment component
+ *    - Holds props of idToPost, postId, deleteComment
+ *    - Used in PostDetail component
+ *    - Uses Comment component
  */
 
-function Comment({comment, deleteComment, postId, commentId}) {
+function Comment({ id, text, postId}) {
+  const dispatch = useDispatch();
 
-  function handleRemove(){
-    deleteComment(postId, commentId);
+  const handleDelete = (evt) => {
+    async function deleteComment() {
+      await (dispatch(deleteCommentFromAPI(id, postId)));
+    }
+    deleteComment();
   }
 
   return (
-    <div className="Comment">
-      <button className="Comment-button btn btn-danger py-0 px-2" onClick={handleRemove}><b>x</b></button>
-      <li className="Comment-list-item">{comment}</li>
-    </div>
+
+    <div className="Comment" id={id}>
+    <button className="Comment-button btn btn-danger py-0 px-2" onClick={handleDelete}><b>x</b></button>
+    <li className="Comment-list-item">{text}</li>
+  </div>
   );
 }
 

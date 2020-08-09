@@ -5,8 +5,9 @@ import {
   Redirect
 } from 'react-router-dom';
 import PostList from './PostList';
-import PostForm from './PostForm';
-import PostDetail from './PostDetail';
+// import PostForm from './PostForm';
+import Post from './Post';
+import NewPost from './NewPost';
 
 
 /** Routes: Component that performs client-side routing for Jobly
@@ -21,25 +22,22 @@ function Routes({ addPost, updatePost, idToPost, deletePost, addComment, deleteC
       </Route>
 
       <Route exact path="/new">
-        <PostForm 
-          idToPost={idToPost} 
-          addPost={addPost} 
-          updatePost={updatePost}/>
+        <NewPost addPost={addPost} idToPost={idToPost}/>
+
       </Route>
 
       <Route exact path="/:id">
-        <PostDetail 
-          idToPost={idToPost} 
-          updatePost={updatePost} 
+        <Post idToPost={idToPost}
+          updatePost={updatePost}
           deletePost={deletePost}
-          addComment={addComment}
           deleteComment={deleteComment}
-          />
+          addComment={addComment}
+        />
       </Route>
 
       <Redirect to="/" />
     </Switch>
-    
+
   );
 }
 export default Routes;

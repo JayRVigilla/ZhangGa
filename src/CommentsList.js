@@ -1,5 +1,10 @@
 import React from "react";
-import Comment from "./Comment";
+import Comment from './Comment';
+import { fetchPostCommentsFromAPI } from "./actionCreators";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
+import Loading from './Loading';
 
 /** CommentsList: Component that renders each comment component
  *    - Holds props of idToPost, postId, deleteComment
@@ -7,24 +12,30 @@ import Comment from "./Comment";
  *    - Uses Comment component
  */
 
-function CommentsList({ idToPost, postId, deleteComment }) {
+function CommentsList() {
+  const postId = useSelector(store => store.post.id);
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
-  const idToComment = idToPost[postId].comments;
-  const commentIds = Object.keys(idToComment);
+  useEffect(function () {
+    async function fetchComments() {
+      await dispatch(fetchPostCommentsFromAPI(postId));
+      setIsLoading(false);
+    }
+    if(isLoading) fetchComments();
+  }, [dispatch, isLoading, postId])
 
-  const commentComponents = commentIds.map(id => (
-    <Comment
-      postId={postId}
-      key={id}
-      commentId={id}
-      comment={idToComment[id]}
-      deleteComment={deleteComment}
-    />
-  ));
+  const comments = useSelector(store => store.comments)
+  const commentComponents = comments.map(({ id, text }) => (
+    <Comment key={id} id={id} text={text} postId={postId} />
+  ))
 
   return (
     <div>
-      <ul>{commentComponents}</ul>
+      {comments
+        ? <ul>{commentComponents}</ul>
+        : <Loading />
+      }
     </div>
   );
 }

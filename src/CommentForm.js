@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './CommentForm.css';
-import { v4 as uuid } from "uuid";
+import { useDispatch } from 'react-redux';
+import { createCommentToAPI } from './actionCreators';
 
 /** CommentForm: Component that renders the form to add a comment to a post
  *    - Holds state of formdata
@@ -8,10 +9,10 @@ import { v4 as uuid } from "uuid";
  *    - Used in PostDetail component
  */
 
-function CommentForm({ postId, addComment }) {
+function CommentForm({ postId }) {
 
-  let INITIAL_STATE = ({ comment: "" });
-
+  const INITIAL_STATE = ({ text: "" });
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ ...INITIAL_STATE });
 
   const handleChange = evt => {
@@ -21,15 +22,16 @@ function CommentForm({ postId, addComment }) {
       [name]: value
     }));
   }
-  const handleSubmit = evt => {
+
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     const newFormData = {
       ...formData,
-      key: uuid()
     }
-
-    addComment(postId, newFormData);
-
+    async function addCommentFromForm() {
+      await dispatch(createCommentToAPI(newFormData, postId));
+    }
+    addCommentFromForm();
     setFormData({ ...INITIAL_STATE });
   }
 
@@ -38,9 +40,9 @@ function CommentForm({ postId, addComment }) {
     <div className="CommentForm">
       <form onSubmit={handleSubmit}>
 
-        <label className="CommentForm-label" htmlFor="comment">Comment</label>
-        <input name="comment"
-          value={formData.comment}
+        <label className="CommentForm-label" htmlFor="text">Comment</label>
+        <input name="text"
+          value={formData.text}
           onChange={handleChange}>
         </input>
 
