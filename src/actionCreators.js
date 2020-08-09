@@ -5,7 +5,7 @@ import {
   ERROR,
   ADD_POST,
   UPDATE_POST,
-  // FETCH_COMMENTS,
+  FETCH_COMMENTS,
   DELETE_POST,
   ADD_COMMENT,
   DELETE_COMMENT
@@ -29,12 +29,12 @@ function fetchTitles(titles) {
   };
 }
 
-// function fetchPostComments(idToComment) {
-//   return {
-//     type: FETCH_COMMENTS,
-//     idToComment
-//   };
-// }
+function fetchPostComments(comments) {
+  return {
+    type: FETCH_COMMENTS,
+    comments
+  };
+}
 
 function fetchPost(post) {
   // function fetchPost(postId){
@@ -105,17 +105,16 @@ export function fetchTitlesFromAPI() {
   };
 }
 
-// export function fetchPostCommentsFromAPI(postId) {
-//   return async function thunk(dispatch) {
-//     try {
-//       let comments = await axios.get(`${API_BASE_URL}/${postId}/comments`);
-//       let idToComment = arrayToObject(comments.data);
-//       dispatch(fetchPostComments(idToComment));
-//     } catch (error) {
-//       dispatch(handleError(error.response.data));
-//     }
-//   }
-// }
+export function fetchPostCommentsFromAPI(postId) {
+  return async function (dispatch) {
+    try {
+      let comments = await axios.get(`${API_BASE_URL}/${postId}/comments/`);
+      dispatch(fetchPostComments(comments.data));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
+  }
+}
 
 /** Retrieve & dispatch a single post's data. */
 
@@ -124,10 +123,6 @@ export function fetchPostFromAPI(postId) {
     try {
       let resp = await axios.get(`${API_BASE_URL}/${postId}`);
       let post = resp.data;
-
-      // let idToComment = arrayToObject(post.comments)
-      // post.idToComment = idToComment;
-      // delete post.comments;
       dispatch(fetchPost(post));
 
     } catch (error) {
@@ -181,6 +176,7 @@ export function createCommentToAPI(commentData, postId) {
 }
 
 export function deleteCommentFromAPI(commentId, postId) {
+
   return async function (dispatch) {
     try {
       await axios.delete(`${API_BASE_URL}/${postId}/comments/${commentId}`);

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './CommentForm.css';
 import { useDispatch } from 'react-redux';
 import { createCommentToAPI } from './actionCreators';
-// import { v4 as uuid } from "uuid";
 
 /** CommentForm: Component that renders the form to add a comment to a post
  *    - Holds state of formdata
@@ -10,7 +9,7 @@ import { createCommentToAPI } from './actionCreators';
  *    - Used in PostDetail component
  */
 
-function CommentForm({ postId, addComment }) {
+function CommentForm({ postId }) {
 
   const INITIAL_STATE = ({ text: "" });
   const dispatch = useDispatch();
@@ -29,13 +28,10 @@ function CommentForm({ postId, addComment }) {
     const newFormData = {
       ...formData,
     }
-    console.log('*****\n\n Value of newFormData in ', newFormData, '\n\n *****')
     async function addCommentFromForm() {
-      // await dispatch(addComment(newFormData, postId));
       await dispatch(createCommentToAPI(newFormData, postId));
     }
     addCommentFromForm();
-    console.log('*****\n\n Passed addCommentFromForm from CommentForm \n\n *****')
     setFormData({ ...INITIAL_STATE });
   }
 

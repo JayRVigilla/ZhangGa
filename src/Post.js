@@ -7,7 +7,7 @@ import { /**Redirect,**/ useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchPostFromAPI } from "./actionCreators";
 import { useSelector, useDispatch } from "react-redux";
-
+import Loading from './Loading';
 /** */
 
 
@@ -32,14 +32,6 @@ function Post({ idToPost, updatePost, deletePost, deleteComment, addComment }) {
     if (isLoading) getPostData();
   }, [isLoading, dispatch, id, post])
 
-  const loading = () => {
-    return (
-      <div>
-        <h2>Loading...</h2>
-      </div>
-    )
-  }
-
   if (isEditing) {
     return <PostForm idToPost={idToPost} updatePost={updatePost} />
   }
@@ -47,7 +39,7 @@ function Post({ idToPost, updatePost, deletePost, deleteComment, addComment }) {
   return (
     <div>
       {isLoading
-        ? loading()
+        ? <Loading />
         : <PostDetail
           post={post}
           deletePost={deletePost}

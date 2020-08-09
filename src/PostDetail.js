@@ -35,7 +35,7 @@ function PostDetail({post, updatePost, addComment, deleteComment, deletePost, is
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p className="PostDetail-body border-bottom">{body}</p>
-      <CommentsList comments={post.comments} deleteComment={deleteComment}/>
+      <CommentsList/>
       <CommentForm postId={id} addComment={addComment}/>
     </div>
   );

@@ -10,22 +10,20 @@ import { fetchTitlesFromAPI } from './actionCreators';
  *    - Uses PostCard component
  */
 
-function PostList(/**{idToPost}**/) {
+function PostList() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(function(){
+  useEffect(function () {
     async function fetchTitles() {
       await dispatch(fetchTitlesFromAPI());
       setIsLoading(false);
     }
     if (isLoading) fetchTitles();
-
   }, [dispatch, isLoading])
 
   // let postsList = Object.keys(idToPost).map(id => idToPost[id]);
-  const postsList = useSelector(store => store.titles);
-
+  let postsList = useSelector(store => store.titles);
   const postCards = postsList.map(({ title, description, id }) => (
     <PostCard
       key={id}
