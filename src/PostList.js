@@ -22,8 +22,9 @@ function PostList() {
     if (isLoading) fetchTitles();
   }, [dispatch, isLoading])
 
-  // let postsList = Object.keys(idToPost).map(id => idToPost[id]);
-  let postsList = useSelector(store => store.titles);
+  const titles = useSelector(store => store.titles);
+  let postsList = Object.keys(titles).map(k => ({...titles[k], id: k}));
+
   const postCards = postsList.map(({ title, description, id }) => (
     <PostCard
       key={id}

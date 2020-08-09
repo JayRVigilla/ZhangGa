@@ -15,12 +15,12 @@ const API_BASE_URL = 'http://localhost:5000/api/posts';
 
 // // helper function from Medium to convert Arrays of Objects into an Object
 // // https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
-// const arrayToObject = (array) =>
-//   array.reduce((obj, item) => {
-//     obj[item.id] = item;
-//     delete obj[item.id].id; // deletes id key from api data to remove redundancies
-//     return obj
-//   }, {})
+const arrayToObject = (array) =>
+  array.reduce((obj, item) => {
+    obj[item.id] = item;
+    delete obj[item.id].id; // deletes id key from api data to remove redundancies
+    return obj
+  }, {})
 
 function fetchTitles(titles) {
   return {
@@ -75,7 +75,6 @@ function deletePost(postId) {
 }
 
 function addComment(newComment, postId) {
-  console.log('addComment action called');
   return {
     type: ADD_COMMENT,
     newComment,
@@ -97,8 +96,9 @@ function deleteComment(commentId, postId) {
 export function fetchTitlesFromAPI() {
   return async function (dispatch) {
     try {
-      let titles = await axios.get(`${API_BASE_URL}/`);
-      dispatch(fetchTitles(titles.data));
+      const titles = await axios.get(`${API_BASE_URL}/`);
+      const titlesObj = arrayToObject(titles.data);
+      dispatch(fetchTitles(titlesObj));
     } catch (error) {
       dispatch(handleError(error.response.data));
     }
@@ -145,7 +145,6 @@ export function createPostToAPI(postData) {
 export function updatePostToAPI(postData, postId) {
   return async function (dispatch) {
     try {
-      console.log('*****\n\n Value of postData in updatePostToAPI', postData, '\n\n *****')
       let updatedPost = await axios.put(`${API_BASE_URL}/${postId}`, postData);
       dispatch(updatePost(updatedPost, postId));
     } catch (error) {

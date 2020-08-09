@@ -22,7 +22,6 @@ function PostForm(/** {addPost, updatePost } */) {
 
   // if post already exists, grab values from the post to populate the form
   if (id) {
-    console.log('*****\n\n Value of post in postForm', post, '\n\n *****')
     const { title, description, body } = post;
     INITIAL_STATE = { title, description, body };
   }

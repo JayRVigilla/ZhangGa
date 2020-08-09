@@ -12,7 +12,7 @@ import {
 
 const DEFAULT_STATE = {
   post: {},
-  titles: [],
+  titles: {},
   comments: []
 }
 
@@ -37,8 +37,8 @@ function rootReducer(state = DEFAULT_STATE, action) {
       let reformattedNewPost = { ...action.newPost };
       delete reformattedNewPost.id;
 
-      let title = { ...action.newPost };
-      delete title.body;
+      // let title = { ...action.newPost };
+      // delete title.body;
 
       return {
         ...state,
@@ -47,26 +47,19 @@ function rootReducer(state = DEFAULT_STATE, action) {
           ...state.post,
           [action.newPost.id]: reformattedNewPost
         },
-        titles: [...state.titles, title]
+        titles: { ...state.titles }
       }
 
     case UPDATE_POST:
-      let commentsCopy = { ...state.post[action.updatedPost.id].comments };
       let reformattedUpdatedPost = { ...action.updatedPost };
-      reformattedUpdatedPost.comments = commentsCopy;
       delete reformattedUpdatedPost.id;
 
       let updatedTitle = { ...action.updatedPost }
-      delete title.body;
+      delete updatedTitle.body;
 
       return {
         ...state,
-        post:
-        {
-          ...state.post,
-          [action.updatedPost.id]: reformattedUpdatedPost
-        },
-        titles: [...state.titles, updatedTitle]
+        titles: {...state.titles}
       }
 
     case DELETE_POST:
