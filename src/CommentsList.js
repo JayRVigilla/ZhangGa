@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import Loading from './Loading';
+import { ListGroup } from 'reactstrap';
 
 /** CommentsList: Component that renders each comment component
  *    - Holds props of idToPost, postId, deleteComment
@@ -31,9 +32,12 @@ function CommentsList() {
   ))
 
   return (
+
     <div>
+      <h6>Comments:</h6>
       {comments
-        ? <ul>{commentComponents}</ul>
+        // ? <ul>{commentComponents}</ul>
+        ? <ListGroup>{commentComponents}</ListGroup>
         : <Loading />
       }
     </div>

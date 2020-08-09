@@ -11,8 +11,12 @@ function Nav() {
   return (
     <div className="Nav">
       <div className="Nav-contents">
-        <h1>Microblog</h1>
-        <h4>Get into the Rithm of blogging.</h4>
+
+      <h1>＿φ(°-°=)</h1>
+        <h4>Welcome to ZhangGa!</h4>
+
+        {/* <h1>Microblog</h1>
+        <h4>Get into the Rithm of blogging.</h4> */}
         <div>
           <NavLink className="Nav-NavLink" to="">Blog</NavLink>
           <NavLink className="Nav-NavLink" to="/new">Add new post</NavLink>

@@ -3,6 +3,8 @@ import './PostList.css';
 import PostCard from './PostCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTitlesFromAPI } from './actionCreators';
+import { ListGroup, ListGroupItem } from 'reactstrap';
+import Loading from './Loading';
 
 /** PostList: Component that renders a welcome message and a list of posts
  *    - Holds prop of idToPost
@@ -23,7 +25,7 @@ function PostList() {
   }, [dispatch, isLoading])
 
   const titles = useSelector(store => store.titles);
-  let postsList = Object.keys(titles).map(k => ({...titles[k], id: k}));
+  let postsList = Object.keys(titles).map(k => ({ ...titles[k], id: k }));
 
   const postCards = postsList.map(({ title, description, id }) => (
     <PostCard
@@ -36,11 +38,11 @@ function PostList() {
 
   return (
     <div className="PostList">
-      <h3>＿φ(°-°=)</h3>
-      <p>Welcome to ZhangGa!</p>
-      <div>
-        {postCards}
-      </div>
+      {isLoading
+        ? <Loading />
+        :
+        <ListGroup>{postCards}</ListGroup>
+      }
     </div>
   );
 }
