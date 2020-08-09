@@ -3,7 +3,7 @@ import './PostList.css';
 import PostCard from './PostCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTitlesFromAPI } from './actionCreators';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup } from 'reactstrap';
 import Loading from './Loading';
 
 /** PostList: Component that renders a welcome message and a list of posts

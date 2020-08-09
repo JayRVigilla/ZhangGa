@@ -4,8 +4,12 @@ import { fetchPostCommentsFromAPI } from "./actionCreators";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from 'react-router-dom'
 import Loading from './Loading';
 import { ListGroup } from 'reactstrap';
+import './CommentsList.css';
+import CommentForm from './CommentForm';
+
 
 /** CommentsList: Component that renders each comment component
  *    - Holds props of idToPost, postId, deleteComment
@@ -13,17 +17,19 @@ import { ListGroup } from 'reactstrap';
  *    - Uses Comment component
  */
 
-function CommentsList() {
+function CommentsList({ addComment }) {
   const postId = useSelector(store => store.post.id);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
+  const { id } = useParams();
+
 
   useEffect(function () {
     async function fetchComments() {
       await dispatch(fetchPostCommentsFromAPI(postId));
       setIsLoading(false);
     }
-    if(isLoading) fetchComments();
+    if (isLoading) fetchComments();
   }, [dispatch, isLoading, postId])
 
   const comments = useSelector(store => store.comments)
@@ -32,11 +38,12 @@ function CommentsList() {
   ))
 
   return (
-
-    <div>
-      <h6>Comments:</h6>
+    <div className="comments-list">
+      <div className="comments-header">
+        <h6>Comments:</h6>
+      <CommentForm postId={id} addComment={addComment} />
+      </div>
       {comments
-        // ? <ul>{commentComponents}</ul>
         ? <ListGroup>{commentComponents}</ListGroup>
         : <Loading />
       }

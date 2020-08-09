@@ -1,16 +1,14 @@
 .CommentForm {
   position: relative;
-  right: 2rem;
-  top: 2rem;
 }
 
 .CommentForm-label {
   width: 10rem;
   text-align: right;
-  margin-right: 0.5rem;
+  margin-right: 0.3rem;
 }
 
 .CommentForm-button {
   display: inline-block;
-  margin: 1rem;
+  margin: .3rem;
 }

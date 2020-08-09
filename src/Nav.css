@@ -1,18 +1,36 @@
 .Nav {
-  background-color: #ddd;
-  height: 10rem;
+  /* display: flex;
+  flex-direction: row; */
+  background-color: rgb(42, 55, 43);
+  /* height: 4rem; */
+  color: rgb(99, 92, 54)
 }
 
-.Nav h1 {
+.Nav .logo{
+  display: flex;
+  flex-direction: row;
   font-size: 3rem;
   font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.Nav .logo h4{
+margin: 0rem;
+}
+
+.Nav .nav-links{
+
 }
 
 .Nav-NavLink {
-  margin: 2rem; 
+  margin: .5rem 1rem;
+  color: rgb(124, 114, 88);
 }
 
 .Nav-contents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   position: relative;
   top: 1rem;
 }

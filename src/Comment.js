@@ -2,6 +2,7 @@ import React from "react";
 import { deleteCommentFromAPI } from "./actionCreators";
 import { useDispatch } from "react-redux";
 import { ListGroupItem } from 'reactstrap';
+import './Comment.css';
 
 /** Comment: Component that renders each comment component
  *    - Holds props of idToPost, postId, deleteComment
@@ -21,10 +22,10 @@ function Comment({ id, text, postId }) {
 
   return (
     <ListGroupItem>
-      {/* <div className="Comment" id={id}> */}
+      <div className="Comment" id={id}>
         {text}
         <button className="Comment-button btn btn-danger py-0 px-2" onClick={handleDelete}><b>x</b></button>
-      {/* </div> */}
+      </div>
     </ListGroupItem>
   );
 }
