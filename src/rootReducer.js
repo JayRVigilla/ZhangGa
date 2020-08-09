@@ -41,41 +41,40 @@ function rootReducer(state = DEFAULT_STATE, action) {
       delete title.body;
 
       return {
-        ...state, idToPost:
+        ...state,
+        post:
         {
-          ...state.idToPost,
+          ...state.post,
           [action.newPost.id]: reformattedNewPost
         },
         titles: [...state.titles, title]
       }
 
     case UPDATE_POST:
-      let idToCommentsCopy = { ...state.idToPost[action.updatedPost.id].idToComment };
+      let commentsCopy = { ...state.post[action.updatedPost.id].comments };
       let reformattedUpdatedPost = { ...action.updatedPost };
-      reformattedUpdatedPost.idToComment = idToCommentsCopy;
+      reformattedUpdatedPost.comments = commentsCopy;
       delete reformattedUpdatedPost.id;
 
       let updatedTitle = { ...action.updatedPost }
       delete title.body;
 
       return {
-        ...state, idToPost:
+        ...state,
+        post:
         {
-          ...state.idToPost,
+          ...state.post,
           [action.updatedPost.id]: reformattedUpdatedPost
         },
         titles: [...state.titles, updatedTitle]
       }
 
     case DELETE_POST:
-      let idToPostCopy = { ...state.idToPost }
-      delete idToPostCopy[action.postId];
-
       let titlesCopy = [...state.titles].filter(title => title.id !== action.postId);
 
       return {
-        ...state, idToPost:
-          { ...idToPostCopy },
+        ...state,
+        post: {},
         titles: titlesCopy
       };
 

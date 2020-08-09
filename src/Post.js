@@ -33,7 +33,7 @@ function Post({ idToPost, updatePost, deletePost, deleteComment, addComment }) {
   }, [isLoading, dispatch, id, post])
 
   if (isEditing) {
-    return <PostForm idToPost={idToPost} updatePost={updatePost} />
+    return <PostForm />
   }
 
   return (

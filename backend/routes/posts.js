@@ -44,7 +44,6 @@ router.get("/", async function (req, res, next) {
  *        description,
  *        body,
  *        votes,
- *        comments: [ { id, text }, ... ],
  *      }
  */
 
@@ -55,16 +54,9 @@ router.get("/:id", async function (req, res, next) {
               p.title,
               p.description,
               p.body,
-              p.votes,
-              CASE WHEN COUNT(c.id) = 0 THEN JSON '[]' ELSE JSON_AGG(
-                    JSON_BUILD_OBJECT('id', c.id, 'text', c.text)
-                ) END AS comments
+              p.votes
       FROM posts p
-        LEFT JOIN comments c ON c.post_id = p.id
       WHERE p.id = $1
-
-      GROUP BY p.id
-      ORDER BY p.id
       `, [req.params.id]
     );
     return res.json(result.rows[0]);

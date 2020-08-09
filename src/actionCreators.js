@@ -145,10 +145,11 @@ export function createPostToAPI(postData) {
 export function updatePostToAPI(postData, postId) {
   return async function (dispatch) {
     try {
+      console.log('*****\n\n Value of postData in updatePostToAPI', postData, '\n\n *****')
       let updatedPost = await axios.put(`${API_BASE_URL}/${postId}`, postData);
-      dispatch(updatePost(updatedPost.data));
+      dispatch(updatePost(updatedPost, postId));
     } catch (error) {
-      dispatch(handleError(error.response.data));
+      dispatch(handleError(error.response));
     }
   }
 }

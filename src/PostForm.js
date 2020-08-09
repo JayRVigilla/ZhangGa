@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
 import './PostForm.css';
 import { v4 as uuid } from "uuid";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { createPostToAPI, updatePostToAPI } from './actionCreators';
 
 
-/** PostForm: Component that renders a form to add or update a post 
+/** PostForm: Component that renders a form to add or update a post
  * (based on existance of a valid id from params)
  *    - Holds state of formdata
- *    - Holds props of addPost, idToPost, and updatePost
+ *    - Holds props of addPost, post, and updatePost
  *    - Used in PostDetail and Routes components
  */
 
-function PostForm({ addPost, idToPost, updatePost }) {
-
+function PostForm(/** {addPost, updatePost } */) {
   let INITIAL_STATE = { title: "", description: "", body: "" };
-
+  const post = useSelector(store => store.post);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = useParams();
 
   // if post already exists, grab values from the post to populate the form
   if (id) {
-    const { title, description, body } = idToPost[id];
+    console.log('*****\n\n Value of post in postForm', post, '\n\n *****')
+    const { title, description, body } = post;
     INITIAL_STATE = { title, description, body };
   }
 
-  const [formData, setFormData] = useState({...INITIAL_STATE });  
-  // QUESTION: heard spreading this OBJ is a good idea, what are the pros? 
-  // If that component gets unmounted and mounted again, we wouldn't get the same reference..
+  const [formData, setFormData] = useState({ ...INITIAL_STATE });
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -43,16 +45,26 @@ function PostForm({ addPost, idToPost, updatePost }) {
 
       // rename this to id or commentId vs. postId to be more explicit throughout
       postId: id ? id : uuid(),
-      // comments: id ? {...idToPost[id].comments} : {}
+      // comments: id ? {...post[id].comments} : {}
+    }
+
+    async function updatePost() {
+      await dispatch(updatePostToAPI(newFormData, id));
+    }
+    async function addPost() {
+      await dispatch(createPostToAPI(newFormData));
     }
 
     if (id) {
-      updatePost(id, newFormData);
+      // updatePost(id, newFormData);
+      updatePost();
     } else {
-      addPost(newFormData.postId, newFormData); 
+      // addPost(newFormData.postId, newFormData);
+      addPost();
     }
 
     setFormData({ ...INITIAL_STATE });
+    history.push('/');
   }
 
 
