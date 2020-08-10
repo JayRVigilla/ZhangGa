@@ -1,7 +1,7 @@
 import React/** , { useState }*/ from 'react';
 import './App.css';
-import Routes from "./Routes";
-import Nav from './Nav';
+import Routes from "../Routes";
+import Nav from '../Nav';
 
 /** App: Component that renders Nav and Routes
  *    - Holds state of idToPost, an object of post objects,

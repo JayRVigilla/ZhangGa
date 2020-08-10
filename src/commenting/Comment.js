@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteCommentFromAPI } from "./actionCreators";
+import { deleteCommentFromAPI } from "../actions/actionCreators";
 import { useDispatch } from "react-redux";
 import { ListGroupItem } from 'reactstrap';
 import './Comment.css';

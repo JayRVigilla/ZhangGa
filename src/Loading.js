@@ -4,7 +4,7 @@ import { Spinner } from 'reactstrap';
 function Loading() {
 return (
   <div>
-    <Spinner style={{width: '15rem', height: '15rem' }} type='grow' />{""}
+    <Spinner style={{width: '12rem', height: '12rem' }} />{""}
         <h2>Loading...</h2>
       </div>
     )

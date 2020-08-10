@@ -4,10 +4,10 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import PostList from './PostList';
+import PostList from './posting/PostList';
 // import PostForm from './PostForm';
-import Post from './Post';
-import NewPost from './NewPost';
+import Post from './posting/Post';
+import NewPost from './posting/NewPost';
 
 
 /** Routes: Component that performs client-side routing for Jobly

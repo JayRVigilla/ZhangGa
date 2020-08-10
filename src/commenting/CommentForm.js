@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CommentForm.css';
 import { useDispatch } from 'react-redux';
-import { createCommentToAPI } from './actionCreators';
+import { createCommentToAPI } from '../actions/actionCreators';
 
 /** CommentForm: Component that renders the form to add a comment to a post
  *    - Holds state of formdata
@@ -46,7 +46,7 @@ function CommentForm({ postId }) {
           onChange={handleChange}>
         </input>
 
-        <button className="CommentForm-button btn btn-primary py-1">add</button>
+        <button className="CommentForm-button btn btn-success py-1">add</button>
       </form>
     </div>
   );

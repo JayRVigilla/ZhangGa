@@ -3,7 +3,7 @@ import './PostForm.css';
 import { v4 as uuid } from "uuid";
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { createPostToAPI, updatePostToAPI } from './actionCreators';
+import { createPostToAPI, updatePostToAPI } from '../actions/actionCreators';
 
 
 /** PostForm: Component that renders a form to add or update a post
@@ -13,7 +13,7 @@ import { createPostToAPI, updatePostToAPI } from './actionCreators';
  *    - Used in PostDetail and Routes components
  */
 
-function PostForm(/** {addPost, updatePost } */) {
+function PostForm() {
   let INITIAL_STATE = { title: "", description: "", body: "" };
   const post = useSelector(store => store.post);
   const dispatch = useDispatch();
@@ -51,13 +51,7 @@ function PostForm(/** {addPost, updatePost } */) {
       await dispatch(createPostToAPI(newFormData));
     }
 
-    if (id) {
-
-      updatePost();
-    } else {
-
-      addPost();
-    }
+    id ? updatePost() :addPost();
 
     setFormData({ ...INITIAL_STATE });
     history.push('/');

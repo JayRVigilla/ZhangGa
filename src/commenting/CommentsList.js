@@ -1,11 +1,11 @@
 import React from "react";
 import Comment from './Comment';
-import { fetchPostCommentsFromAPI } from "./actionCreators";
+import { fetchPostCommentsFromAPI } from "../actions/actionCreators";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from 'react-router-dom'
-import Loading from './Loading';
+import Loading from '../Loading';
 import { ListGroup } from 'reactstrap';
 import './CommentsList.css';
 import CommentForm from './CommentForm';

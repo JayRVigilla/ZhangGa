@@ -1,8 +1,5 @@
 .Nav {
-  /* display: flex;
-  flex-direction: row; */
   background-color: rgb(42, 55, 43);
-  /* height: 4rem; */
   color: rgb(99, 92, 54)
 }
 
@@ -16,15 +13,13 @@
 
 .Nav .logo h4{
 margin: 0rem;
-}
-
-.Nav .nav-links{
-
+text-shadow: .23px .23px rgb(250, 240, 170);
 }
 
 .Nav-NavLink {
   margin: .5rem 1rem;
   color: rgb(124, 114, 88);
+  text-shadow: .23px .23px rgb(250, 240, 170);
 }
 
 .Nav-contents {

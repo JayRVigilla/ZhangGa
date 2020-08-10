@@ -10,7 +10,7 @@ import { ListGroupItem } from "reactstrap";
  */
 
 function PostCard({ id, title, description }) {
-
+// TODO: create login feature -> attribute author & give 100 character preview.
   return (
     <ListGroupItem>
       <div className="PostCard" id={id}>

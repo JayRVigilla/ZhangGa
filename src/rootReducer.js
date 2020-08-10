@@ -8,7 +8,7 @@ import {
   DELETE_POST,
   ADD_COMMENT,
   DELETE_COMMENT
-} from './actionTypes';
+} from './actions/actionTypes';
 
 const DEFAULT_STATE = {
   post: {},
