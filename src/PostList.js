@@ -11,20 +11,19 @@ import PostCard from './PostCard';
 function PostList({ idToPost }) {
 
   let postsList = Object.keys(idToPost).map(id => idToPost[id]);
- 
+
   const postCards = postsList.map(({ title, description, key }) => (
-    <PostCard 
-      key={key} 
+    <PostCard
+      key={key}
       id={key}
-      title={title} 
+      title={title}
       description={description}></PostCard>
   ))
 
 
+
   return (
     <div className="PostList">
-      <h3>＿φ(°-°=)</h3>
-      <p>Welcome to Microblog!</p>
       <div>
         {postCards}
       </div>

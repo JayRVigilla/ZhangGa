@@ -1,18 +1,30 @@
 .Nav {
-  background-color: #ddd;
-  height: 10rem;
+  background-color: rgb(86, 167, 93);
+  color: rgb(228, 206, 84)
 }
 
-.Nav h1 {
+.Nav .logo{
+  display: flex;
+  flex-direction: row;
   font-size: 3rem;
   font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.Nav .logo h4{
+margin: 0rem;
+text-shadow: .23px .23px rgb(250, 240, 170);
 }
 
 .Nav-NavLink {
-  margin: 2rem; 
+  margin: .5rem 1rem;
+  color: rgb(250, 240, 170);
 }
 
 .Nav-contents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   position: relative;
   top: 1rem;
 }
