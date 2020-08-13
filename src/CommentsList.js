@@ -1,5 +1,7 @@
 import React from "react";
 import Comment from "./Comment";
+import CommentForm from "./CommentForm";
+import {ListGroup} from "reactstrap"
 import './CommentsList.css';
 
 /** CommentsList: Component that renders each comment component
@@ -8,7 +10,7 @@ import './CommentsList.css';
  *    - Uses Comment component
  */
 
-function CommentsList({ idToPost, postId, deleteComment }) {
+function CommentsList({ idToPost, postId, deleteComment, addComment }) {
 
   const idToComment = idToPost[postId].comments;
   const commentIds = Object.keys(idToComment);
@@ -24,8 +26,16 @@ function CommentsList({ idToPost, postId, deleteComment }) {
   ));
 
   return (
-    <div>
-      <ul>{commentComponents}</ul>
+    <div className="comments-list">
+      <div className="comments-header">
+        <h6>Comments:</h6>
+      <CommentForm postId={postId} addComment={addComment} />
+      </div>
+      {idToComment
+        ? <ListGroup>{commentComponents}</ListGroup>
+        // :
+        : <p>Loading</p>
+      }
     </div>
   );
 }

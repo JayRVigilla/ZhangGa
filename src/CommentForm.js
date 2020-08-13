@@ -38,7 +38,7 @@ function CommentForm({ postId, addComment }) {
     <div className="CommentForm">
       <form onSubmit={handleSubmit}>
 
-        <label className="CommentForm-label" htmlFor="comment">Comment</label>
+        <label className="CommentForm-label" htmlFor="comment"></label>
         <input name="comment"
           value={formData.comment}
           onChange={handleChange}>
