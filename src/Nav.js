@@ -1,7 +1,6 @@
-import React from 'react';
-import './Nav.css';
-import { NavLink } from 'react-router-dom';
-
+import React from "react";
+import "./Nav.css";
+import { NavLink } from "react-router-dom";
 
 /** Nav: Component that renders the navbar
  *    links to main blog page or to add new post
@@ -13,12 +12,18 @@ function Nav() {
     <div className="Nav">
       <div className="Nav-contents">
         <div className="logo">
-          <h4>＿φ(°-°=)</h4>
-          <h4>ZhangGa</h4>
+          <a href="/">
+            <h4>＿φ(°-°=)</h4>
+            <h4>ZhangGa</h4>
+          </a>
         </div>
         <div className="nav-links">
-          <NavLink className="Nav-NavLink" to="">Blog</NavLink>
-          <NavLink className="Nav-NavLink" to="/new">Add new post</NavLink>
+          <NavLink className="Nav-NavLink" to="">
+            Blog
+          </NavLink>
+          <NavLink className="Nav-NavLink" to="/new">
+            Add new post
+          </NavLink>
         </div>
       </div>
     </div>
