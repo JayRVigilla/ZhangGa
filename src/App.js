@@ -3,6 +3,7 @@ import './App.css';
 import Routes from "./Routes";
 import Nav from './Nav';
 import { useHistory } from 'react-router-dom';
+import idToPostI_S from './idToPostInitialState';
 
 
 /** App: Component that renders Nav and Routes
@@ -11,8 +12,10 @@ import { useHistory } from 'react-router-dom';
  *    - Used in Index component
  */
 
+
+
 function App() {
-  const [idToPost, setIdToPost] = useState({});
+  const [idToPost, setIdToPost] = useState(idToPostI_S);
   const history = useHistory();
 
   const addPost = (id, post) => {
