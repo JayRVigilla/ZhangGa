@@ -1,5 +1,6 @@
 import React from "react";
 import Comment from "./Comment";
+import './CommentsList.css';
 
 /** CommentsList: Component that renders each comment component
  *    - Holds props of idToPost, postId, deleteComment

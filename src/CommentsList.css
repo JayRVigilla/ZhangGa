@@ -1,0 +1,8 @@
+.comments-list h6{
+  margin-left: .33rem;
+}
+.comments-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
