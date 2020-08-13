@@ -3,7 +3,6 @@ import './PostDetail.css';
 import { useParams, Redirect } from 'react-router-dom';
 import PostForm from './PostForm';
 import CommentsList from './CommentsList';
-import CommentForm from './CommentForm';
 
 
 /** PostDetail: Component that renders the detailed page for each post, including the title, description, body
