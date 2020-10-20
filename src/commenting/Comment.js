@@ -23,8 +23,14 @@ function Comment({ id, text, postId }) {
   return (
     <ListGroupItem>
       <div className="Comment" id={id}>
-        {text}
-        <button className="Comment-button btn btn-danger py-0 px-2" onClick={handleDelete}><b>x</b></button>
+        <p>{text}</p>
+        {/* <a classname="Comment-button btn btn-danger" href="#" onClick={handleDelete}><i class="fas fa-minus-circle"></i></a> */}
+        {/* <button className="Comment-button btn btn-danger" onClick={handleDelete}>x</button> */}
+        <div className="button holder">
+          {/* <button className="btn btn-danger" onClick={handleDelete}> */}
+            <i className="fas fa-backspace" onClick={handleDelete}></i>
+          {/* </button> */}
+        </div>
       </div>
     </ListGroupItem>
   );

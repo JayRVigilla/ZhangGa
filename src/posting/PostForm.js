@@ -14,7 +14,7 @@ import { createPostToAPI, updatePostToAPI } from '../actions/actionCreators';
  */
 
 function PostForm() {
-  let INITIAL_STATE = { title: "", description: "", body: "" };
+  let INITIAL_STATE = { title: "", description: "", img: "", body: "" };
   const post = useSelector(store => store.post);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,8 +22,8 @@ function PostForm() {
 
   // if post already exists, grab values from the post to populate the form
   if (id) {
-    const { title, description, body } = post;
-    INITIAL_STATE = { title, description, body };
+    const { title, description, body, img } = post;
+    INITIAL_STATE = { title, description, body, img };
   }
 
   const [formData, setFormData] = useState({ ...INITIAL_STATE });
@@ -51,7 +51,7 @@ function PostForm() {
       await dispatch(createPostToAPI(newFormData));
     }
 
-    id ? updatePost() :addPost();
+    id ? updatePost() : addPost();
 
     setFormData({ ...INITIAL_STATE });
     history.push('/');
@@ -75,6 +75,15 @@ function PostForm() {
           <label className="PostForm-label" htmlFor="description">Description</label>
           <input className="PostForm-input" name="description"
             value={formData.description}
+            onChange={handleChange}
+            cols="45">
+          </input>
+        </div>
+
+        <div className="form-group">
+          <label className="PostForm-label" htmlFor="img">Image URL</label>
+          <input className="PostForm-input" name="img"
+            value={formData.img}
             onChange={handleChange}
             cols="45">
           </input>

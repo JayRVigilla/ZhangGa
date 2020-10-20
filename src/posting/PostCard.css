@@ -1,0 +1,17 @@
+.PostCard{
+  display: flex;
+  justify-content: space-around;
+}
+
+img{
+  width: 20%;
+}
+
+.post.info{
+  width: 70%;
+}
+
+p{
+  text-indent: 3em;
+  text-align: left;
+}

@@ -9,13 +9,16 @@ import { ListGroupItem } from "reactstrap";
  *      - Used in PostList component
  */
 
-function PostCard({ id, title, description }) {
+function PostCard({ id, title, description, img }) {
 // TODO: create login feature -> attribute author & give 100 character preview.
   return (
     <ListGroupItem>
       <div className="PostCard" id={id}>
-        <h5><Link to={`/${id}`}>{title}</Link></h5>
-        <p><i>{description}</i></p>
+        <img src={`${img}`} alt={`${title} pic`} />
+        <div className="post info">
+          <h5><Link to={`/${id}`}>{title}</Link></h5>
+          <p><i>{description}</i></p>
+        </div>
       </div>
     </ListGroupItem>
   );

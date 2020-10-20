@@ -23,7 +23,7 @@ function PostDetail({ post, updatePost, addComment, isEditing, setIsEditing }) {
 
   if (isEditing) return <PostForm post={post} updatePost={updatePost} />
 
-  const { title, description, body } = post;
+  const { title, description, body, img } = post;
 
   const handleDelete = (evt) => {
     async function deletePost() {
@@ -35,6 +35,7 @@ function PostDetail({ post, updatePost, addComment, isEditing, setIsEditing }) {
 
   return (
     <div className="PostDetail">
+      <img src={`${img}`} alt={`${title} pic`}/>
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <button className="PostDetail-button btn btn-primary py-0 px-1" onClick={(evt) => setIsEditing(true)}><i className="fas fa-edit"> Edit</i></button>

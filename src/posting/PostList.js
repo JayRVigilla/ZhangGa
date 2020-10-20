@@ -25,13 +25,15 @@ function PostList() {
   }, [dispatch, isLoading])
 
   const titles = useSelector(store => store.titles);
+  console.log("*****\n\n", titles)    // FIX: logs 6 times
   let postsList = Object.keys(titles).map(k => ({ ...titles[k], id: k }));
 
-  const postCards = postsList.map(({ title, description, id }) => (
+  const postCards = postsList.map(({ title, description, id, img }) => (
     <PostCard
       key={id}
       id={id}
       title={title}
+      img={img}
       description={description} />
   ))
 

@@ -27,7 +27,8 @@ function Routes({ addPost, updatePost, idToPost, deletePost, addComment, deleteC
       </Route>
 
       <Route exact path="/:id">
-        <Post idToPost={idToPost}
+        <Post
+          // idToPost={idToPost}
           updatePost={updatePost}
           deletePost={deletePost}
           deleteComment={deleteComment}

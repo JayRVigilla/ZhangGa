@@ -1,5 +1,12 @@
 .Comment{
   display: flex;
   justify-content: space-between;
+  text-align: left;
+  align-items: center;
+}
 
+.button.holder{
+  display: flex;
+  flex-direction: column;
+  color: red;
 }

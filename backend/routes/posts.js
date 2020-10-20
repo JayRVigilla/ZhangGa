@@ -24,6 +24,7 @@ router.get("/", async function (req, res, next) {
       `SELECT p.id,
               p.title,
               p.description,
+              p.img,
               p.votes
       FROM posts p
       ORDER BY p.id
@@ -43,6 +44,7 @@ router.get("/", async function (req, res, next) {
  *        title,
  *        description,
  *        body,
+ *        img,
  *        votes,
  *      }
  */
@@ -54,6 +56,7 @@ router.get("/:id", async function (req, res, next) {
               p.title,
               p.description,
               p.body,
+              p.img,
               p.votes
       FROM posts p
       WHERE p.id = $1
@@ -93,11 +96,11 @@ router.post("/:id/vote/:direction", async function (req, res, next) {
 
 router.post("/", async function (req, res, next) {
   try {
-    const {title, body, description} = req.body;
+    const {title, body, img, description} = req.body;
     const result = await db.query(
-      `INSERT INTO posts (title, description, body)
-        VALUES ($1, $2, $3)
-        RETURNING id, title, description, body, votes`,
+      `INSERT INTO posts (title, description, body, img)
+        VALUES ($1, $2, $3, $4)
+        RETURNING id, title, description, body, img, votes`,
       [title, description, body]);
     return res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -108,18 +111,18 @@ router.post("/", async function (req, res, next) {
 
 /** PUT /[id]     update existing post
  *
- * { title, description, body }  =>  { id, title, description, body, votes }
+ * { title, description, body }  =>  { id, title, description, img, body, votes }
  *
  */
 
 router.put("/:id", async function (req, res, next) {
   try {
-    const {title, body, description} = req.body;
+    const {title, body, description, img} = req.body;
     const result = await db.query(
-      `UPDATE posts SET title=$1, description=$2, body=$3
-        WHERE id = $4
-        RETURNING id, title, description, body, votes`,
-      [title, description, body, req.params.id]);
+      `UPDATE posts SET title=$1, description=$2, body=$3, img=$4
+        WHERE id = $5
+        RETURNING id, title, description, body, img, votes`,
+      [title, description, body, img, req.params.id]);
     return res.json(result.rows[0]);
   } catch (e) {
     return next(e);
