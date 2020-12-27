@@ -1,6 +1,7 @@
 import React from 'react';
 import './Nav.css';
 import { NavLink } from 'react-router-dom';
+import logo from "./images/zhangGaLogo.png"
 
 
 /** Nav: Component that renders the navbar
@@ -13,8 +14,7 @@ function Nav() {
     <div className="Nav">
       <div className="Nav-contents">
         <div className="logo">
-          <h4>＿φ(°-°=)</h4>
-          <h4>ZhangGa</h4>
+          <img src={`${logo}`} alt=""/>
         </div>
         <div className="nav-links">
           <NavLink className="Nav-NavLink" to="">Blog</NavLink>

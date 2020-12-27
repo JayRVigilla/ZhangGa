@@ -3,17 +3,19 @@
   color: rgb(228, 206, 84)
 }
 
-.Nav .logo{
+.logo>IMG{
   display: flex;
   flex-direction: row;
-  font-size: 3rem;
-  font-weight: 200;
-  margin-bottom: 1rem;
+  width: 40%;
 }
 
-.Nav .logo h4{
-margin: 0rem;
-text-shadow: .23px .23px rgb(250, 240, 170);
+.logo{
+  left: 1em;
+}
+
+.nav-links{
+  display: flex;
+  align-items: center;
 }
 
 .Nav-NavLink {
@@ -26,5 +28,4 @@ text-shadow: .23px .23px rgb(250, 240, 170);
   flex-direction: row;
   justify-content: space-between;
   position: relative;
-  top: 1rem;
 }
