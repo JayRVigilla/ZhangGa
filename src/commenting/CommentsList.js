@@ -40,7 +40,7 @@ function CommentsList({ addComment }) {
   return (
     <div className="comments-list">
       <div className="comments-header">
-        <h6>Comments:</h6>
+        <h2>Comments:</h2>
       <CommentForm postId={id} addComment={addComment} />
       </div>
       {comments

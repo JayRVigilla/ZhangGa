@@ -11,4 +11,11 @@
 .CommentForm-button {
   display: inline-block;
   margin: .3rem;
+  background-color: var(--red);
+}
+
+.comments-header{
+  display: flex;
+  align-items: baseline;
+  padding: 0 1em 1em 1em;
 }
