@@ -11,6 +11,7 @@ const router = new express.Router();
  * => [ { id,
  *        title,
  *        description,
+ *        img,
  *        votes,
  *      },
  *      ...
@@ -101,7 +102,7 @@ router.post("/", async function (req, res, next) {
       `INSERT INTO posts (title, description, body, img)
         VALUES ($1, $2, $3, $4)
         RETURNING id, title, description, body, img, votes`,
-      [title, description, body]);
+      [title, description, body, img]);
     return res.status(201).json(result.rows[0]);
   } catch (err) {
     return next(err);

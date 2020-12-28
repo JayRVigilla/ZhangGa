@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-items: center;
+  height: 66vh;
 }
 
 #Home>h1{
@@ -16,4 +17,5 @@
 #featured-image{
 width: 100%;
 object-fit: cover;
+max-height: 100%;
 }

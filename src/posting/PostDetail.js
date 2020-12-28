@@ -32,12 +32,11 @@ function PostDetail({ post, updatePost, addComment, isEditing, setIsEditing }) {
     deletePost();
     history.push('/');
   }
-
   return (
     <div className="PostDetail">
       <img src={`${img}`} alt={`${title} pic`}/>
-      <h2>{title}</h2>
-      <h6><i>{description}</i></h6>
+      <h1>{title}</h1>
+      <h3><i>{description}</i></h3>
       <button className="PostDetail-button btn btn-primary py-0 px-1" onClick={(evt) => setIsEditing(true)}><i className="fas fa-edit"> Edit</i></button>
       <button className="PostDetail-button btn btn-danger py-0 px-1" onClick={handleDelete}> <i className="fas fa-trash-alt fa-sm"> Delete</i></button>
       <p className="PostDetail-body border-bottom">{body}</p>

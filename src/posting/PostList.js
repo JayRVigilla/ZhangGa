@@ -25,7 +25,6 @@ function PostList() {
   }, [dispatch, isLoading])
 
   const titles = useSelector(store => store.titles);
-  console.log("*****\n\n", titles)    // FIX: logs 6 times
   let postsList = Object.keys(titles).map(k => ({ ...titles[k], id: k }));
 
   const postCards = postsList.map(({ title, description, id, img }) => (
@@ -40,6 +39,7 @@ function PostList() {
 
   return (
     <section className="PostList">
+      <h2>Latest Experiences</h2>
       {isLoading
         ? <Loading />
         :

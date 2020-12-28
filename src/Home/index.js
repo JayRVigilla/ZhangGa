@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 import basketball from './../images/audi-nissen.png';
 import togetherBlank from './../images/clarke-sanders.png';
@@ -25,29 +25,19 @@ function Home() {
     togetherGraf
   ]
 
-  // const randNum = (num) => { Math.floor(Math.random() * num)}
-  // let featuredImage = images[randNum(images.length-1)]
-
-  // let featuredImage = images[images.length - 1]
-  // let randNum = Math.floor(Math.random() * images.length)
-  let randNum = images.length-1;
-
-  function newImg() {
-    randNum = setInterval(nextImg, 5000)
-  }
+  const [featuredImage, setFeaturedImage] = useState(images[images.length-1]);
 
 
-  function nextImg() {
-    randNum = Math.floor(Math.random() * images.length)
-    console.log(`in nextImg, randNum is ${randNum}`)
-    console.log(`featuredImage = ${featuredImage}`)
-  }
-
-  let featuredImage = images[randNum]
-
-  // newImg()
-
-  useEffect()
+  useEffect(function () {
+    function newImg() {
+      function nextImg() {
+        const rand = Math.floor(Math.random() * images.length)
+        setFeaturedImage(images[rand]);
+      }
+      setInterval(nextImg, 7000)
+    }
+    newImg()
+  }, [featuredImage, images])
 
   return (
     <section id="Home" >
