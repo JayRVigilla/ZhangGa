@@ -1,0 +1,19 @@
+#Home{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+#Home>h1{
+  position: absolute;
+  right: 1em;
+  top: 13%;
+  background-color: rgba(250, 240, 170, .5);
+  padding: 2px 4px;
+  color: var(--asphalt);
+}
+
+#featured-image{
+width: 100%;
+object-fit: cover;
+}

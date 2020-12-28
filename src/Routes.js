@@ -8,6 +8,7 @@ import PostList from './posting/PostList';
 // import PostForm from './PostForm';
 import Post from './posting/Post';
 import NewPost from './posting/NewPost';
+import Home from './Home'
 
 
 /** Routes: Component that performs client-side routing for Jobly
@@ -18,6 +19,7 @@ function Routes({ addPost, updatePost, idToPost, deletePost, addComment, deleteC
   return (
     <Switch>
       <Route exact path="/">
+        <Home/>
         <PostList idToPost={idToPost} />
       </Route>
 

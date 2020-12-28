@@ -20,7 +20,7 @@
 
 .Nav-NavLink {
   margin: .5rem 1rem;
-  color: rgb(250, 240, 170);
+  color: var(--yellow)
 }
 
 .Nav-contents {

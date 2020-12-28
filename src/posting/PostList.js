@@ -39,13 +39,13 @@ function PostList() {
 
 
   return (
-    <div className="PostList">
+    <section className="PostList">
       {isLoading
         ? <Loading />
         :
         <ListGroup>{postCards}</ListGroup>
       }
-    </div>
+    </section>
   );
 }
 
