@@ -1,16 +1,16 @@
 .Nav {
-  background-color: rgb(86, 167, 93);
-  color: rgb(228, 206, 84)
+  background-color: rgba(19, 10, 6, .65);
+  height: 60px;
 }
 
-.logo>IMG{
+.logo>img{
   display: flex;
   flex-direction: row;
-  width: 40%;
+  width: 30%;
 }
 
 .logo{
-  left: 1em;
+  margin-left: 1em;
 }
 
 .nav-links{
