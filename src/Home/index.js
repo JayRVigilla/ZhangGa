@@ -34,7 +34,7 @@ function Home() {
         const rand = Math.floor(Math.random() * images.length)
         setFeaturedImage(images[rand]);
       }
-      setInterval(nextImg, 7000)
+      setInterval(nextImg, 3000)
     }
     newImg()
   }, [featuredImage, images])
