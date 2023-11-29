@@ -11,7 +11,7 @@ fetchTitles,
   deleteComment
 } from './actions';
 
-const API_BASE_URL = 'http://localhost:5000/api/posts';
+const API_BASE_URL = process.env.REACT_APP_SERVER_URL ?? 'http://localhost:5000/api/posts';
 
 // // helper function from Medium to convert Arrays of Objects into an Object
 // // https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
